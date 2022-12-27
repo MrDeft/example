@@ -8,12 +8,12 @@ export default class App extends Component {
   }
 
   componentDidMount = () => {
-    fetch('http://www.omdbapi.com/?apikey=69249a39&s=panda')
+    fetch('https://www.omdbapi.com/?apikey=69249a39&s=panda')
       .then(res => res.json())
       .then(data => this.setState({ movies: data.Search }))
   }
   SearchMv = (str) => {
-    fetch(`http://www.omdbapi.com/?apikey=69249a39&s=${str}`)
+    fetch(`https://www.omdbapi.com/?apikey=69249a39&s=${str}`)
       .then(res => res.json())
       .then(data => this.setState({ movies: data.Search }))
   }
