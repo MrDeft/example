@@ -7,7 +7,7 @@ export default class App extends Component {
     movies: []
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     fetch('http://www.omdbapi.com/?apikey=69249a39&s=panda')
       .then(res => res.json())
       .then(data => this.setState({ movies: data.Search }))
