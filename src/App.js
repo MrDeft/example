@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react'
+import Movies from './Movies'
+import Search from './Search'
 
-function App() {
-  const [count, setCount] = useState(0);
+export default class App extends Component {
+  state = {
+    movies: []
+  }
 
-  return (
-    <div className='container'>
-      <h1 className='number'>{count}</h1>
-      <button onClick={() => setCount(count => count + 1)}>+</button>
-      <button onClick={() => setCount(count => count - 1)}>-</button>
-      <button onClick={() => setCount(count => count = 0)}>Reset</button>
-    </div>
-  );
+  componentDidMount() {
+    fetch('http://www.omdbapi.com/?apikey=69249a39&s=panda')
+      .then(res => res.json())
+      .then(data => this.setState({ movies: data.Search }))
+  }
+  SearchMv = (str) => {
+    fetch(`http://www.omdbapi.com/?apikey=69249a39&s=${str}`)
+      .then(res => res.json())
+      .then(data => this.setState({ movies: data.Search }))
+  }
+  render() {
+    // console.log(this.state.movies)
+    return (
+      <>
+        <Search SearchMv={this.SearchMv} />
+        {this.state.movies.length ? (<Movies movies={this.state.movies} />) : <span className='loading'>Loading...</span>}
+      </>
+    )
+  }
 }
-
-export default App;
